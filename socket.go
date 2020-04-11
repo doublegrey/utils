@@ -10,9 +10,9 @@ import (
 // sock, err := uds.Listen("/env/example.sock", time.Second*2)
 //
 // sock.Write(msg)
-func Listen(a string, delay time.Duration) (*net.UnixConn, error) {
+func Listen(address string, delay time.Duration) (*net.UnixConn, error) {
 	for {
-		addr, err := net.ResolveUnixAddr("unix", a)
+		addr, err := net.ResolveUnixAddr("unix", address)
 		if err != nil {
 			return nil, err
 		}
