@@ -1,4 +1,4 @@
-package uds
+package utils
 
 import (
 	"net"

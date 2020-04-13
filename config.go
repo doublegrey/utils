@@ -1,4 +1,4 @@
-package config
+package utils
 
 import (
 	"github.com/BurntSushi/toml"
@@ -28,8 +28,9 @@ type consumer struct {
 	Address string
 }
 
-func (c config) Read(path string) error {
+func (c Config) Read(path string) error {
 	if _, err := toml.DecodeFile(path, &c); err != nil {
 		return err
 	}
+	return nil
 }
