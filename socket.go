@@ -7,10 +7,10 @@ import (
 	"time"
 )
 
-// sock, err := uds.Listen("/env/example.sock", time.Second*2)
+// sock, err := uds.ConnectSocket("/env/example.sock", time.Second*2)
 //
 // sock.Write(msg)
-func Listen(address string, delay time.Duration) (*net.UnixConn, error) {
+func ConnectSocket(address string, delay time.Duration) (*net.UnixConn, error) {
 	for {
 		addr, err := net.ResolveUnixAddr("unix", address)
 		if err != nil {
