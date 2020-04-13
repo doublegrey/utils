@@ -17,6 +17,14 @@ type Header struct {
 	DataLength uint32
 }
 
+func (m Message) ForwardMessage(c *net.UnixConn) error {
+	enc, err := m.Encode()
+	if err == nil {
+		_, err = c.Write(enc)
+	}
+	return err
+}
+
 func (m Message) Encode() ([]byte, error) {
 	buf := new(bytes.Buffer)
 	m.Header.DataLength = uint32(len(m.Data))
