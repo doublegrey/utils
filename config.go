@@ -28,7 +28,7 @@ type Consumer struct {
 	Address string
 }
 
-func (c Config) Read(path string) error {
+func (c *Config) Read(path string) error {
 	if _, err := toml.DecodeFile(path, &c); err != nil {
 		return err
 	}

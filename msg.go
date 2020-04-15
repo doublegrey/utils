@@ -17,7 +17,7 @@ type Header struct {
 	DataLength uint32
 }
 
-func (m Message) ForwardMessage(c *net.UnixConn) error {
+func (m *Message) ForwardMessage(c *net.UnixConn) error {
 	enc, err := m.Encode()
 	if err == nil {
 		_, err = c.Write(enc)
@@ -25,7 +25,7 @@ func (m Message) ForwardMessage(c *net.UnixConn) error {
 	return err
 }
 
-func (m Message) Encode() ([]byte, error) {
+func (m *Message) Encode() ([]byte, error) {
 	buf := new(bytes.Buffer)
 	m.Header.DataLength = uint32(len(m.Data))
 	if err := binary.Write(buf, binary.BigEndian, &m.Header); err != nil {
@@ -37,7 +37,7 @@ func (m Message) Encode() ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
-func (m Message) Decode(c net.Conn) error {
+func (m *Message) Decode(c net.Conn) error {
 	buf := make([]byte, 36)
 	if _, err := io.ReadFull(c, buf); err != nil {
 		return err
