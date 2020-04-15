@@ -21,7 +21,6 @@ func ConnectSocket(address string, delay time.Duration) (*net.UnixConn, error) {
 			time.Sleep(delay)
 			continue
 		}
-		defer conn.Close()
 		return conn, nil
 	}
 }
