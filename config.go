@@ -5,23 +5,23 @@ import (
 )
 
 type Config struct {
-	Instances map[string]instance
-	Producers map[string]producer
-	Consumers map[string]consumer
+	Instances map[string]Instance
+	Producers map[string]Producer
+	Consumers map[string]Consumer
 }
-type instance struct {
+type Instance struct {
 	ID      string
 	Listen  string
 	Produce string
 }
-type producer struct {
+type Producer struct {
 	ID      string
 	Listen  string
 	Produce string
 	Topic   string
 	Address string
 }
-type consumer struct {
+type Consumer struct {
 	ID      string
 	Produce string
 	Topic   string
