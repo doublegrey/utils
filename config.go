@@ -29,7 +29,7 @@ type Consumer struct {
 }
 
 func (c Config) Read(path string) error {
-	if _, err := toml.DecodeFile(path, &c); err != nil {
+	if _, err := toml.DecodeFile(path, c); err != nil {
 		return err
 	}
 	return nil
