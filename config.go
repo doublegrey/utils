@@ -13,6 +13,7 @@ type Instance struct {
 	ID      string
 	Listen  string
 	Produce string
+	Params  map[string]string
 }
 type Producer struct {
 	ID      string
@@ -20,12 +21,14 @@ type Producer struct {
 	Produce string
 	Topic   string
 	Address string
+	Params  map[string]string
 }
 type Consumer struct {
 	ID      string
 	Produce string
 	Topic   string
 	Address string
+	Params  map[string]interface{}
 }
 
 func (c *Config) Read(path string) error {
