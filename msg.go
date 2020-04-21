@@ -28,10 +28,10 @@ func (m *Message) ForwardMessage(c *net.UnixConn) error {
 func (m *Message) Encode() ([]byte, error) {
 	buf := new(bytes.Buffer)
 	m.Header.DataLength = uint32(len(m.Data))
-	if err := binary.Write(buf, binary.BigEndian, &m.Header); err != nil {
+	if err := binary.Write(buf, binary.LittleEndian, &m.Header); err != nil {
 		return nil, err
 	}
-	if err := binary.Write(buf, binary.BigEndian, &m.Data); err != nil {
+	if err := binary.Write(buf, binary.LittleEndian, &m.Data); err != nil {
 		return nil, err
 	}
 	return buf.Bytes(), nil
@@ -42,7 +42,7 @@ func (m *Message) Decode(c net.Conn) error {
 	if _, err := io.ReadFull(c, buf); err != nil {
 		return err
 	}
-	if err := binary.Read(bytes.NewReader(buf), binary.BigEndian, &m.Header); err != nil { // FIXME: https://stackoverflow.com/questions/41400639/is-binary-read-slow
+	if err := binary.Read(bytes.NewReader(buf), binary.LittleEndian, &m.Header); err != nil { // FIXME: https://stackoverflow.com/questions/41400639/is-binary-read-slow
 		return err
 	}
 	m.Data = make([]byte, m.Header.DataLength)
