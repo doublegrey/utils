@@ -8,13 +8,13 @@ type Config struct {
 	Instances map[string]Instance
 	Producers map[string]Producer
 	Consumers map[string]Consumer
-	Params    map[string]string
+	Params    map[string]interface{}
 }
 type Instance struct {
 	ID      string
 	Listen  string
 	Produce string
-	Params  map[string]string
+	Params  map[string]interface{}
 }
 type Producer struct {
 	ID      string
@@ -22,14 +22,14 @@ type Producer struct {
 	Produce string
 	Topic   string
 	Address string
-	Params  map[string]string
+	Params  map[string]interface{}
 }
 type Consumer struct {
 	ID      string
 	Produce string
 	Topic   string
 	Address string
-	Params  map[string]string
+	Params  map[string]interface{}
 }
 
 func (c *Config) Read(path string) error {
