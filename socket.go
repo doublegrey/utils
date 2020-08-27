@@ -40,7 +40,7 @@ func ConnectSocket(address string, interval, deadline time.Duration) (*net.UnixC
 				continue
 			}
 			conn, err := net.DialUnix("unix", nil, addr)
-			if err == nil {
+			if err != nil {
 				if !wait() {
 					return
 				}
