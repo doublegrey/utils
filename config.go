@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"os"
+
 	"github.com/BurntSushi/toml"
 )
 
@@ -32,8 +34,15 @@ type Consumer struct {
 	Params  map[string]interface{}
 }
 
-func (c *Config) Read(path string) error {
-	if _, err := toml.DecodeFile(path, &c); err != nil {
+// Parse flow.toml config
+//
+// use CONFIG_PATH env var if no parameters given
+func (c *Config) Parse(path ...string) error {
+	config := os.Getenv("CONFIG_PATH")
+	if len(path) > 0 {
+		config = path[0]
+	}
+	if _, err := toml.DecodeFile(config, &c); err != nil {
 		return err
 	}
 	return nil
